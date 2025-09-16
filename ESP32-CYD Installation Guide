@@ -1,0 +1,55 @@
+# ESP32-CYD Installation Guide
+
+This guide will help you install applications and firmware on your ESP32-CYD (Color Your Display) device.
+
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Installation Methods](#installation-methods)
+   - [Web Installer (Easiest)](#web-installer-easiest)
+   - [ESPtool.py (Command Line)](#esptoolpy-command-line)
+   - [PlatformIO](#platformio)
+   - [Arduino IDE](#arduino-ide)
+3. [Troubleshooting](#troubleshooting)
+4. [FAQ](#faq)
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- An ESP32-CYD device
+- A USB-C cable for data transfer (not just charging)
+- A computer with USB ports
+- Internet connection (for web installer)
+
+## Installation Methods
+
+### Web Installer (Easiest)
+
+The simplest way to flash your ESP32-CYD is using the web-based flasher:
+
+1. **Put your ESP32-CYD into bootloader mode**:
+   - Hold down the `BOOT` button
+   - While holding `BOOT`, press and release the `RESET` button
+   - Release the `BOOT` button
+   - The device should now be in flashing mode
+
+2. **Open the ESP Web Flasher**:
+   - Visit [https://espressif.github.io/esptool-js/](https://espressif.github.io/esptool-js/)
+   - Click "Connect" and select your ESP32-CYD from the list
+
+3. **Flash your firmware**:
+   - Click "Erase" to clear the existing firmware
+   - Click "Browse" and select your `.bin` file
+   - Click "Program" to flash the new firmware
+   - Wait for the process to complete
+
+4. **Reset your device**:
+   - Press the `RESET` button to boot into the new firmware
+
+### ESPtool.py (Command Line)
+
+For advanced users comfortable with command line tools:
+
+1. **Install esptool.py**:
+   ```bash
+   pip install esptool
