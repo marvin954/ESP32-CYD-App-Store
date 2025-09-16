@@ -1,0 +1,15 @@
+{
+  "name": "Flappy Bird",
+  "version": "1.2",
+  "author": "YourGitHubHandle",
+  "category": "Games",
+  "description": "A clone of the infamous mobile game. Tap the screen to flap!",
+  "website": "https://github.com/original/repo", // Link to source
+  "bin_file": "flappy_bird.bin",
+  "bin_size": 1024576,
+  "bin_md5": "a1b2c3d4e5f6...", // For file integrity check
+  "esp32_chip": "ESP32-D0WD", // Recommended chip
+  "sdk": "ESP-IDF",           // Or "Arduino"
+  "flash_instructions": "Flash to 0x10000", // Often not needed if using base FW
+  "dependencies": ["odroid_go_base"] // If it requires a specific base
+}
