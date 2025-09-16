@@ -53,3 +53,153 @@ For advanced users comfortable with command line tools:
 1. **Install esptool.py**:
    ```bash
    pip install esptool
+
+2. Windows: Check Device Manager for COM ports
+
+Mac/Linux: Run ls /dev/tty.* or ls /dev/ttyUSB*
+
+3.Put device in bootloader mode (as described above)
+
+4.Erase flash (recommended before new installs):
+esptool.py --port [YOUR_PORT] erase_flash
+
+Example: esptool.py --port /dev/ttyUSB0 erase_flash
+
+5. Flash your firmware:esptool.py --port [YOUR_PORT] --baud 460800 write_flash -z 0x1000 [FIRMWARE_FILE.bin]
+
+Example: esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 flappy_bird.bin
+
+PlatformIO
+For developers using PlatformIO:
+
+1.Install PlatformIO:
+
+As a VSCode extension, or standalone with:
+pip install platformio
+
+2.Create a new project:
+pio project init --board esp32dev
+
+3.Copy our template:
+Use the template from our firmware/platformio_template directory
+
+Or copy your source files to the src directory
+
+4.Build and upload:
+pio run -t upload
+
+5.Monitor serial output:
+pio device monitor
+
+Arduino IDE
+For Arduino IDE users:
+
+Install ESP32 support:
+
+Open Arduino IDE
+
+Go to File > Preferences
+
+Add to Additional Boards Manager URLs:
+https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+
+Go to Tools > Board > Boards Manager
+
+Search for "ESP32" and install
+
+Select correct board:
+
+Tools > Board > ESP32 Arduino > "ESP32 Dev Module"
+
+Configure settings:
+
+Flash Mode: "QIO"
+
+Flash Frequency: "80MHz"
+
+Flash Size: "4MB (32Mb)"
+
+Partition Scheme: "Default 4MB with spiffs"
+
+Upload Speed: "921600"
+
+Upload your sketch:
+
+Select the correct port from Tools > Port
+
+Click the Upload button
+
+Troubleshooting
+Common Issues
+Port not found:
+
+Ensure USB cable supports data transfer
+
+Install appropriate USB drivers (CP210x or CH340)
+
+Upload fails:
+
+Make sure device is in bootloader mode
+
+Try a lower baud rate (115200 instead of 460800)
+
+Device not responding after flash:
+
+Try erasing flash completely: esptool.py erase_flash
+
+Check if firmware is compatible with your hardware version
+
+Insufficient power:
+
+Some ESP32-CYD models require external power for certain operations
+
+Try connecting to a powered USB hub
+
+Driver Installation
+Windows CP210x Drivers:
+Download from: Silicon Labs CP210x Drivers
+
+Windows CH340 Drivers:
+Download from: CH340 Drivers
+
+Mac/Linux:
+These typically work without additional drivers.
+
+FAQ
+Q: How do I know which firmware to use?
+A: Check the metadata.json file in each app directory for compatibility information.
+
+Q: Can I brick my device?
+A: It's very difficult to permanently brick an ESP32. If you have issues, try a full flash erase.
+
+Q: Why do I need to erase flash before programming?
+A: This ensures a clean installation and prevents issues from leftover data.
+
+Q: How can I backup my current firmware?
+A: You can read the flash with:
+
+bash
+esptool.py --port [PORT] read_flash 0x0 0x400000 backup.bin
+Q: My device has different pin assignments, what should I do?
+A: Check the HARDWARE.md file for information about different ESP32-CYD models and their pinouts.
+
+Q: Where can I get help?
+A: Create an issue on our GitHub repository or check the ESP32-CYD community forums.
+
+Need More Help?
+If you're still having issues:
+
+Check our Troubleshooting Wiki
+
+Search existing issues on our GitHub repository
+
+Create a new issue with details about your problem
+
+Happy hacking with your ESP32-CYD!
+
+text
+
+This comprehensive installation guide covers all the main methods for flashing firmware to your ESP32-CYD device. It includes step-by-step instructions for beginners using the web installer as well as advanced methods for developers.
+
+The guide also includes troubleshooting tips for common issues and a FAQ section to help users resolve problems quickly. You can add this to your repository as `INSTALL_GUIDE.md` in the `docs/` directory.
+
